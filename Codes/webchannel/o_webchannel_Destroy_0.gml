@@ -1,1 +1,2 @@
 ds_list_destroy(socket_list)
+ds_map_destroy(exec_callbacks)

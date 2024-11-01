@@ -4,3 +4,7 @@ socket_id = -1
 is_server = false
 is_client = false
 socket_list = ds_list_create()
+MAX_INT = power(2, 31) - 1
+MIN_INT = -power(2, 31)
+exec_id = 0
+exec_callbacks = ds_map_create()

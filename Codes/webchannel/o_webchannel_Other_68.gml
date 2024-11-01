@@ -1,5 +1,5 @@
-var _socket_id = ds_map_find_value(async_load, "id")
-if (_socket_id == socket_id || ds_list_find_index(socket_list, _socket_id) != -1)
+var _socket_from = ds_map_find_value(async_load, "id")
+if (_socket_from == socket_id || ds_list_find_index(socket_list, _socket_from) != -1)
 {
     switch ds_map_find_value(async_load, "type")
     {
@@ -20,7 +20,7 @@ if (_socket_id == socket_id || ds_list_find_index(socket_list, _socket_id) != -1
             if (!is_undefined(packet_buffer))
             {
                 var buffer_data = buffer_read(packet_buffer, buffer_string)
-                scr_actionsLogUpdate("[Multiplayer]-->" + buffer_data)
+                scr_mod_webchannel_on_message(buffer_data, _socket_from)  
             }
         break;
     }

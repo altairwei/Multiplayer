@@ -17,6 +17,10 @@ public class Multiplayer : Mod
 
     public override void PatchMod()
     {
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_send.gml"), "scr_mod_webchannel_send");
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_on_message.gml"), "scr_mod_webchannel_on_message");
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_chat.gml"), "scr_mod_webchannel_chat");
+
         UndertaleGameObject o_webchannel = Msl.AddObject(
             name: "o_webchannel",
             isVisible: false,
@@ -32,16 +36,27 @@ public class Multiplayer : Mod
 
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_host.gml"), "scr_mod_webchannel_host");
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_join.gml"), "scr_mod_webchannel_join");
-        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_send_string.gml"), "scr_mod_webchannel_send_string");
 
         Msl.LoadGML("gml_Object_o_player_KeyPress_117") // F6
             .MatchAll()
-            .InsertBelow(@"scr_mod_webchannel_host(8181)")
+            .InsertBelow(@"
+                scr_mod_webchannel_host(8181)
+                var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
+                global.playerGridX = _FuneralCave.x
+                global.playerGridY = _FuneralCave.y
+                scr_smoothRoomChange(r_ManticoreCave, [4])
+            ")
             .Save();
 
         Msl.LoadGML("gml_Object_o_player_KeyPress_119") // F8
             .MatchAll()
-            .InsertBelow(@"scr_mod_webchannel_join(""127.0.0.1"", 8181)")
+            .InsertBelow(@"
+                scr_mod_webchannel_join(""127.0.0.1"", 8181)
+                var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
+                global.playerGridX = _FuneralCave.x
+                global.playerGridY = _FuneralCave.y
+                scr_smoothRoomChange(r_ManticoreCave, [4])
+            ")
             .Save();
 
         // Key "Y"
@@ -51,16 +66,16 @@ public class Multiplayer : Mod
             eventCode: @"
                 with (o_webchannel)
                 {
-                    var buffer_data =  get_string(""Send?"", ""Hello World"")
+                    var _text =  get_string(""Send?"", ""Hello World"")
                     if (is_client)
                     {
-                        scr_mod_webchannel_send_string(socket_id, buffer_data)
+                        scr_mod_webchannel_chat(_text)
                     }
                     else if (is_server)
                     {
                         for (var i = 0; i < ds_list_size(socket_list); i++) {
                             var _client_socket = ds_list_find_value(socket_list, i)
-                            scr_mod_webchannel_send_string(_client_socket, buffer_data)
+                            scr_mod_webchannel_chat(_text, _client_socket)
                         }
                     }
                 }
