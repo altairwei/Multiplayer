@@ -2,28 +2,22 @@ function scr_mod_webchannel_on_message()
 {
     var _json_string = argument[0]
     var _socket_from = argument[1]
-    var _data = json_decode(_json_string)
+    var _data = json_parse(_json_string)
 
-    switch (ds_map_find_value(_data, "MessageType"))
+    switch (_data.MessageType)
     {
         case "TextMessage":
-            scr_actionsLogUpdate("[Multiplayer]-" + ds_map_find_value(_data, "Data"))
+            scr_actionsLogUpdate("[Multiplayer]-" + _data.Data)
         break;
 
         case "InvokeScript":
             // Invoke script
-            var _script = ds_map_find_value(_data, "Script")
-            var _arguments = ds_map_find_value(_data, "Arguments")
-            var _with = ds_map_find_value(_data, "With")
-
-            if is_undefined(_with)
-                _with = self
-
-            with (_with)
-                var _value = script_execute_ext(_script, _arguments)
+            var _script = _data.Script
+            var _arguments = _data.Arguments
+            var _value = script_execute_ext(_script, _arguments)
 
             // Send response back
-            var _exec_id = ds_map_find_value(_data, "ExecId")
+            var _exec_id = _data.ExecId
             if !is_undefined(_exec_id)
             {
                 var _resp = ds_map_create()
@@ -36,13 +30,17 @@ function scr_mod_webchannel_on_message()
         break;
 
         case "Response":
-            var _exec_id = ds_map_find_value(_data, "ExecId")
-            var _value = ds_map_find_value(_data, "Value")
+            var _exec_id = _data.ExecId
+            var _value = _data.Value
             var _callback = ds_map_find_value(exec_callbacks, _exec_id)
-            script_execute(_callback, _value)
+            // show_message(string(_callback) + ":" + typeof(_callback))
+            // show_message(script_get_name(_callback))
+            // show_message(asset_get_index(script_get_name(_callback)))
+            // script_execute(_callback, _value)
+            script_execute(asset_get_index(script_get_name(_callback)), _value)
             ds_map_delete(exec_callbacks, _exec_id)
         break;
     }
 
-    ds_map_destroy(_data)
+    // ds_map_destroy(_data)
 }

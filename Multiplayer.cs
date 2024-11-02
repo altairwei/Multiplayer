@@ -20,6 +20,7 @@ public class Multiplayer : Mod
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_send.gml"), "scr_mod_webchannel_send");
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_on_message.gml"), "scr_mod_webchannel_on_message");
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_chat.gml"), "scr_mod_webchannel_chat");
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_invoke.gml"), "scr_mod_webchannel_invoke");
 
         UndertaleGameObject o_webchannel = Msl.AddObject(
             name: "o_webchannel",
@@ -31,6 +32,7 @@ public class Multiplayer : Mod
         o_webchannel.ApplyEvent(ModFiles,
             new MslEvent("webchannel/o_webchannel_Create_0.gml", EventType.Create, 0),
             new MslEvent("webchannel/o_webchannel_Destroy_0.gml", EventType.Destroy, 0),
+            // Async Event: Networking
             new MslEvent("webchannel/o_webchannel_Other_68.gml", EventType.Other, 68)
         );
 
@@ -70,6 +72,9 @@ public class Multiplayer : Mod
                     if (is_client)
                     {
                         scr_mod_webchannel_chat(_text)
+                        scr_mod_webchannel_invoke(gml_Script_scr_npc_check_gold, [100], function() {
+                            scr_actionsLogUpdate(""[Multiplayer]-->scr_npc_check_gold-->"" + string(argument[0]))
+                        })
                     }
                     else if (is_server)
                     {
