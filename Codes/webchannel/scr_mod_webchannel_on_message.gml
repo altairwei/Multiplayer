@@ -33,11 +33,10 @@ function scr_mod_webchannel_on_message()
             var _exec_id = _data.ExecId
             var _value = _data.Value
             var _callback = ds_map_find_value(exec_callbacks, _exec_id)
-            // show_message(string(_callback) + ":" + typeof(_callback))
-            // show_message(script_get_name(_callback))
-            // show_message(asset_get_index(script_get_name(_callback)))
-            // script_execute(_callback, _value)
-            script_execute(asset_get_index(script_get_name(_callback)), _value)
+            if (typeof(_callback) == "method")
+                script_execute(asset_get_index(script_get_name(_callback)), _value)
+            else
+                script_execute(_callback, _value)
             ds_map_delete(exec_callbacks, _exec_id)
         break;
     }

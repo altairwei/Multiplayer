@@ -61,30 +61,38 @@ public class Multiplayer : Mod
             ")
             .Save();
 
-        // Key "Y"
         Msl.AddNewEvent(
             objectName: "o_player",
-            eventType: EventType.KeyPress, subtype: 89,
-            eventCode: @"
+            eventType: EventType.KeyPress, subtype: 89, // Y
+            eventCode: ""
+        );
+
+        Msl.LoadGML(Msl.EventName("o_player", EventType.KeyPress, 89))
+            .MatchAll()
+            .ReplaceBy(@"
                 with (o_webchannel)
                 {
-                    var _text =  get_string(""Send?"", ""Hello World"")
                     if (is_client)
                     {
-                        scr_mod_webchannel_chat(_text)
                         scr_mod_webchannel_invoke(gml_Script_scr_npc_check_gold, [100], function() {
-                            scr_actionsLogUpdate(""[Multiplayer]-->scr_npc_check_gold-->"" + string(argument[0]))
+                            scr_actionsLogUpdate(""[Multiplayer]-->scr_npc_check_gold/1st-->"" + string(argument[0]))
+                            scr_mod_webchannel_invoke(gml_Script_scr_npc_check_gold, [200], function() {
+                                scr_actionsLogUpdate(""[Multiplayer]-->scr_npc_check_gold/2nd-->"" + string(argument[0]))
+                                scr_mod_webchannel_invoke(gml_Script_scr_npc_check_gold, [300], function() {
+                                    scr_actionsLogUpdate(""[Multiplayer]-->scr_npc_check_gold/3rd-->"" + string(argument[0]))
+                                })
+                            })
                         })
                     }
                     else if (is_server)
                     {
                         for (var i = 0; i < ds_list_size(socket_list); i++) {
                             var _client_socket = ds_list_find_value(socket_list, i)
-                            scr_mod_webchannel_chat(_text, _client_socket)
+                            // scr_mod_webchannel_invoke(gml_Script_scr_npc_check_gold, [100], gml_Script_scr_check_money_tt, _client_socket)
                         }
                     }
                 }
-            "
-        );
+            ")
+            .Save();
     }
 }
