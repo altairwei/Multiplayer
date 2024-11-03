@@ -36,13 +36,13 @@ public class Multiplayer : Mod
             new MslEvent("webchannel/o_webchannel_Other_68.gml", EventType.Other, 68)
         );
 
-        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_host.gml"), "scr_mod_webchannel_host");
-        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_webchannel_join.gml"), "scr_mod_webchannel_join");
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_host.gml"), "scr_mod_multiplayer_host");
+        Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_join.gml"), "scr_mod_multiplayer_join");
 
         Msl.LoadGML("gml_Object_o_player_KeyPress_117") // F6
             .MatchAll()
             .InsertBelow(@"
-                scr_mod_webchannel_host(8181)
+                scr_mod_multiplayer_host(8181)
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y
@@ -53,7 +53,7 @@ public class Multiplayer : Mod
         Msl.LoadGML("gml_Object_o_player_KeyPress_119") // F8
             .MatchAll()
             .InsertBelow(@"
-                scr_mod_webchannel_join(""127.0.0.1"", 8181)
+                scr_mod_multiplayer_join(""127.0.0.1"", 8181)
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y

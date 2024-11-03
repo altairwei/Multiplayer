@@ -1,4 +1,4 @@
-function scr_mod_webchannel_join()
+function scr_mod_multiplayer_join()
 {
     var _ip = is_undefined(argument[0]) ? "127.0.0.1" : argument[0]
     var _port = is_undefined(argument[1]) ? 2418 : argument[1]

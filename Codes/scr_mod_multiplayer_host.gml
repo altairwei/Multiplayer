@@ -1,4 +1,4 @@
-function scr_mod_webchannel_host()
+function scr_mod_multiplayer_host()
 {
     var _port = is_undefined(argument[0]) ? 2418 : argument[0]
 
