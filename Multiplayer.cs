@@ -39,6 +39,8 @@ public class Multiplayer : Mod
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_host.gml"), "scr_mod_multiplayer_host");
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_join.gml"), "scr_mod_multiplayer_join");
 
+        Msl.AddRoomJson(ModFiles.GetCode("r_MultiplayerArena_ManticoreCave.gml"));
+
         Msl.LoadGML("gml_Object_o_player_KeyPress_117") // F6
             .MatchAll()
             .InsertBelow(@"
@@ -46,7 +48,7 @@ public class Multiplayer : Mod
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y
-                scr_smoothRoomChange(r_ManticoreCave, [4])
+                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4])
             ")
             .Save();
 
@@ -57,7 +59,7 @@ public class Multiplayer : Mod
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y
-                scr_smoothRoomChange(r_ManticoreCave, [4])
+                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4])
             ")
             .Save();
 
