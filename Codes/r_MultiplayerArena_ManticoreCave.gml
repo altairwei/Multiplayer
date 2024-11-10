@@ -248,34 +248,6 @@
       "image_index": 0
     },
     {
-      "x": 507,
-      "y": 611,
-      "object_definition": "o_position_starter",
-      "instance_id": 271151,
-      "creation_code": "gml_RoomCC_r_ManticoreCave_5_Create",
-      "scale_x": 1,
-      "scale_y": 1,
-      "color": 4294967295,
-      "rotation": 0,
-      "pre_create_code": null,
-      "image_speed": 1,
-      "image_index": 0
-    },
-    {
-      "x": 506,
-      "y": 610,
-      "object_definition": "o_abstract_player",
-      "instance_id": 270530,
-      "creation_code": "gml_RoomCC_r_ManticoreCave_6_Create",
-      "scale_x": 1,
-      "scale_y": 1,
-      "color": 4294967295,
-      "rotation": 0,
-      "pre_create_code": null,
-      "image_speed": 1,
-      "image_index": 0
-    },
-    {
       "x": 0,
       "y": 962,
       "object_definition": "o_hut_wall",
@@ -7080,12 +7052,26 @@
       "image_index": 0
     },
     {
-      "x": 663,
-      "y": 611,
-      "object_definition": "o_position_starter",
-      "instance_id": 279781,
-      "creation_code": "gml_RoomCC_r_ManticoreCave_5_Create",
-      "scale_x": 1,
+      "x": 494,
+      "y": 936,
+      "object_definition": "o_hut_wall",
+      "instance_id": 279782,
+      "creation_code": null,
+      "scale_x": 2,
+      "scale_y": 1,
+      "color": 4294967295,
+      "rotation": 0,
+      "pre_create_code": null,
+      "image_speed": 1,
+      "image_index": 0
+    },
+    {
+      "x": 598,
+      "y": 936,
+      "object_definition": "o_hut_wall",
+      "instance_id": 279783,
+      "creation_code": null,
+      "scale_x": 3,
       "scale_y": 1,
       "color": 4294967295,
       "rotation": 0,
@@ -7205,20 +7191,6 @@
             "pre_create_code": null,
             "image_speed": 1,
             "image_index": 0
-          },
-          {
-            "x": 506,
-            "y": 610,
-            "object_definition": "o_abstract_player",
-            "instance_id": 270530,
-            "creation_code": "gml_RoomCC_r_ManticoreCave_6_Create",
-            "scale_x": 1,
-            "scale_y": 1,
-            "color": 4294967295,
-            "rotation": 0,
-            "pre_create_code": null,
-            "image_speed": 1,
-            "image_index": 0
           }
         ]
       }
@@ -7232,7 +7204,7 @@
       "y_offset": 0,
       "h_speed": 0,
       "v_speed": 0,
-      "is_visible": true,
+      "is_visible": false,
       "layer_data": {
         "instances": [
           {
@@ -8031,7 +8003,7 @@
       "y_offset": 0,
       "h_speed": 0,
       "v_speed": 0,
-      "is_visible": true,
+      "is_visible": false,
       "layer_data": {
         "instances": [
           {
@@ -10344,6 +10316,34 @@
             "pre_create_code": null,
             "image_speed": 1,
             "image_index": 0
+          },
+          {
+            "x": 494,
+            "y": 936,
+            "object_definition": "o_hut_wall",
+            "instance_id": 279782,
+            "creation_code": null,
+            "scale_x": 2,
+            "scale_y": 1,
+            "color": 4294967295,
+            "rotation": 0,
+            "pre_create_code": null,
+            "image_speed": 1,
+            "image_index": 0
+          },
+          {
+            "x": 598,
+            "y": 936,
+            "object_definition": "o_hut_wall",
+            "instance_id": 279783,
+            "creation_code": null,
+            "scale_x": 3,
+            "scale_y": 1,
+            "color": 4294967295,
+            "rotation": 0,
+            "pre_create_code": null,
+            "image_speed": 1,
+            "image_index": 0
           }
         ]
       }
@@ -10583,20 +10583,6 @@
             "pre_create_code": null,
             "image_speed": 1,
             "image_index": 3
-          },
-          {
-            "x": 507,
-            "y": 611,
-            "object_definition": "o_position_starter",
-            "instance_id": 271151,
-            "creation_code": "gml_RoomCC_r_ManticoreCave_5_Create",
-            "scale_x": 1,
-            "scale_y": 1,
-            "color": 4294967295,
-            "rotation": 0,
-            "pre_create_code": null,
-            "image_speed": 1,
-            "image_index": 0
           },
           {
             "x": 821,
@@ -11038,20 +11024,6 @@
             "object_definition": "o_manticorecavepart15",
             "instance_id": 271203,
             "creation_code": null,
-            "scale_x": 1,
-            "scale_y": 1,
-            "color": 4294967295,
-            "rotation": 0,
-            "pre_create_code": null,
-            "image_speed": 1,
-            "image_index": 0
-          },
-          {
-            "x": 663,
-            "y": 611,
-            "object_definition": "o_position_starter",
-            "instance_id": 279781,
-            "creation_code": "gml_RoomCC_r_ManticoreCave_5_Create",
             "scale_x": 1,
             "scale_y": 1,
             "color": 4294967295,

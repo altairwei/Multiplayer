@@ -39,7 +39,7 @@ public class Multiplayer : Mod
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_host.gml"), "scr_mod_multiplayer_host");
         Msl.AddFunction(ModFiles.GetCode("webchannel/scr_mod_multiplayer_join.gml"), "scr_mod_multiplayer_join");
 
-        Msl.AddRoomJson(ModFiles.GetCode("r_MultiplayerArena_ManticoreCave.gml"));
+        PatchArenaRoom();
 
         Msl.LoadGML("gml_Object_o_player_KeyPress_117") // F6
             .MatchAll()
@@ -48,7 +48,8 @@ public class Multiplayer : Mod
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y
-                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4])
+                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4], -1, true)
+                global.position_tag = ""arena_position_server""
             ")
             .Save();
 
@@ -59,7 +60,8 @@ public class Multiplayer : Mod
                 var _FuneralCave = scr_glmap_getLocation(""FuneralCave"")
                 global.playerGridX = _FuneralCave.x
                 global.playerGridY = _FuneralCave.y
-                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4])
+                scr_smoothRoomChange(r_MultiplayerArena_ManticoreCave, [4], -1, true)
+                global.position_tag = ""arena_position_client""
             ")
             .Save();
 
@@ -96,5 +98,30 @@ public class Multiplayer : Mod
                 }
             ")
             .Save();
+    }
+
+    private void PatchArenaRoom()
+    {
+        Msl.AddRoomJson(ModFiles.GetCode("r_MultiplayerArena_ManticoreCave.gml"));
+        UndertaleRoom room = Msl.GetRoom("r_MultiplayerArena_ManticoreCave");
+        UndertaleRoom.Layer LayerFI = Msl.GetLayer(room, UndertaleRoom.LayerType.Instances, "ForegroundInstances");
+
+        room.AddGameObject(
+            LayerFI, "o_position_starter",
+            Msl.AddCode(@"position_tag = ""arena_position_server""", "gml_RoomCC_r_MultiplayerArena_ManticoreCave_100_Create"),
+            x: 507, y: 611
+        );
+
+        room.AddGameObject(
+            LayerFI, "o_position_starter",
+            Msl.AddCode(@"position_tag = ""arena_position_client""", "gml_RoomCC_r_MultiplayerArena_ManticoreCave_101_Create"),
+            x: 663, y: 611
+        );
+
+        room.AddGameObject(
+            LayerFI, "o_abstract_player",
+            x: 506, y: 610
+        );
+
     }
 }
